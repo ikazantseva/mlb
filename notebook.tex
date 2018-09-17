@@ -1,0 +1,1330 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{01 MLB Data Exploration}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}Import dataset:}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{mlb} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/Users/nikolay/Desktop/MLB dataset/baseballdata.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}   \PY{c+c1}{\PYZsh{}use .tail() to see the final rows}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    Unnamed: 0  Rk  Year                    Tm       Lg    G   W   L  Ties  \textbackslash{}
+        0           1   1  2016  Arizona Diamondbacks  NL West  162  69  93     0   
+        1           2   2  2015  Arizona Diamondbacks  NL West  162  79  83     0   
+        2           3   3  2014  Arizona Diamondbacks  NL West  162  64  98     0   
+        3           4   4  2013  Arizona Diamondbacks  NL West  162  81  81     0   
+        4           5   5  2012  Arizona Diamondbacks  NL West  162  81  81     0   
+        
+            W.L.          {\ldots}             R   RA Attendance BatAge  PAge  X.Bat X.P  \textbackslash{}
+        0  0.426          {\ldots}           752  890  2,036,216   26.7  26.4     50  29   
+        1  0.488          {\ldots}           720  713  2,080,145   26.6  27.1     50  27   
+        2  0.395          {\ldots}           615  742  2,073,730   27.6  28.0     52  25   
+        3  0.500          {\ldots}           685  695  2,134,895   28.1  27.6     44  23   
+        4  0.500          {\ldots}           734  688  2,177,617   28.3  27.4     48  23   
+        
+                    Top.Player                               Managers  \textbackslash{}
+        0       J.Segura (5.7)                         C.Hale (69-93)   
+        1  P.Goldschmidt (8.8)                         C.Hale (79-83)   
+        2  P.Goldschmidt (4.5)  K.Gibson (63-96) and A.Trammell (1-2)   
+        3  P.Goldschmidt (7.1)                       K.Gibson (81-81)   
+        4         A.Hill (5.0)                       K.Gibson (81-81)   
+        
+                        current  
+        0  Arizona Diamondbacks  
+        1  Arizona Diamondbacks  
+        2  Arizona Diamondbacks  
+        3  Arizona Diamondbacks  
+        4  Arizona Diamondbacks  
+        
+        [5 rows x 24 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}Exploaring dataset:}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mlb}\PY{p}{)} \PY{c+c1}{\PYZsh{}2594 rows imported}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 2594
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{columns} \PY{c+c1}{\PYZsh{}name of the columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Index(['Unnamed: 0', 'Rk', 'Year', 'Tm', 'Lg', 'G', 'W', 'L', 'Ties', 'W.L.',
+               'pythW.L.', 'Finish', 'GB', 'Playoffs', 'R', 'RA', 'Attendance',
+               'BatAge', 'PAge', 'X.Bat', 'X.P', 'Top.Player', 'Managers', 'current'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{mlb}\PY{o}{.}\PY{n}{columns}\PY{p}{)} \PY{c+c1}{\PYZsh{}24 columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 24
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}type of the data, missing number of rows}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2594 entries, 0 to 2593
+Data columns (total 24 columns):
+Unnamed: 0    2594 non-null int64
+Rk            2594 non-null int64
+Year          2594 non-null int64
+Tm            2594 non-null object
+Lg            2594 non-null object
+G             2594 non-null int64
+W             2594 non-null int64
+L             2594 non-null int64
+Ties          2594 non-null int64
+W.L.          2594 non-null float64
+pythW.L.      2594 non-null float64
+Finish        2594 non-null object
+GB            2594 non-null object
+Playoffs      431 non-null object
+R             2594 non-null int64
+RA            2594 non-null int64
+Attendance    2520 non-null object
+BatAge        2594 non-null float64
+PAge          2594 non-null float64
+X.Bat         2594 non-null int64
+X.P           2594 non-null int64
+Top.Player    2594 non-null object
+Managers      2594 non-null object
+current       2594 non-null object
+dtypes: float64(4), int64(11), object(9)
+memory usage: 486.5+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{}get the statistics of the data}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}         Unnamed: 0           Rk         Year            G            W  \textbackslash{}
+         count  2594.000000  2594.000000  2594.000000  2594.000000  2594.000000   
+         mean   1297.500000    54.824981  1962.175019   155.188897    77.513878   
+         std     748.967623    37.413876    37.413876    12.548301    14.054629   
+         min       1.000000     1.000000  1876.000000    60.000000    17.000000   
+         25\%     649.250000    22.000000  1931.000000   154.000000    68.000000   
+         50\%    1297.500000    48.000000  1969.000000   161.000000    78.000000   
+         75\%    1945.750000    86.000000  1995.000000   162.000000    88.000000   
+         max    2594.000000   141.000000  2016.000000   165.000000   116.000000   
+         
+                          L         Ties         W.L.     pythW.L.            R  \textbackslash{}
+         count  2594.000000  2594.000000  2594.000000  2594.000000  2594.000000   
+         mean     76.925983     0.749036     0.502478     0.502547   694.480339   
+         std      14.629448     1.299325     0.084522     0.079307   113.883503   
+         min      14.000000     0.000000     0.169000     0.209000   298.000000   
+         25\%      67.000000     0.000000     0.444000     0.448000   624.000000   
+         50\%      77.000000     0.000000     0.506000     0.505000   693.000000   
+         75\%      87.000000     1.000000     0.562000     0.556000   765.000000   
+         max     120.000000    10.000000     0.798000     0.835000  1220.000000   
+         
+                         RA       BatAge         PAge        X.Bat          X.P  
+         count  2594.000000  2594.000000  2594.000000  2594.000000  2594.000000  
+         mean    691.134541    28.285736    28.031804    37.583269    16.696608  
+         std     115.287832     1.353542     1.813197     7.951902     5.396655  
+         min     241.000000    23.900000    20.000000    10.000000     2.000000  
+         25\%     618.000000    27.400000    26.900000    33.000000    13.000000  
+         50\%     692.000000    28.300000    28.100000    38.000000    16.000000  
+         75\%     763.000000    29.200000    29.100000    43.000000    20.000000  
+         max    1235.000000    33.600000    34.200000    64.000000    40.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}Rename Columns:}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unnamed: 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rk}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Team}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{League}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GamePlayed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Losses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WinLoss}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pythWinLoss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Finish}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GamesBehind}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Playoffs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RunsScored}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OppontRunScored}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Attendance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BatAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PAge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X.Bat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X.P}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top.Player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Managers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{current}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}    Unnamed: 0  Rk  Year                  Team   League  GamePlayed  Wins  \textbackslash{}
+         0           1   1  2016  Arizona Diamondbacks  NL West         162    69   
+         1           2   2  2015  Arizona Diamondbacks  NL West         162    79   
+         2           3   3  2014  Arizona Diamondbacks  NL West         162    64   
+         3           4   4  2013  Arizona Diamondbacks  NL West         162    81   
+         4           5   5  2012  Arizona Diamondbacks  NL West         162    81   
+         
+            Losses  Ties  WinLoss\%          {\ldots}           RunsScored OppontRunScored  \textbackslash{}
+         0      93     0     0.426          {\ldots}                  752             890   
+         1      83     0     0.488          {\ldots}                  720             713   
+         2      98     0     0.395          {\ldots}                  615             742   
+         3      81     0     0.500          {\ldots}                  685             695   
+         4      81     0     0.500          {\ldots}                  734             688   
+         
+           Attendance BatAge  PAge  X.Bat X.P           Top.Player  \textbackslash{}
+         0  2,036,216   26.7  26.4     50  29       J.Segura (5.7)   
+         1  2,080,145   26.6  27.1     50  27  P.Goldschmidt (8.8)   
+         2  2,073,730   27.6  28.0     52  25  P.Goldschmidt (4.5)   
+         3  2,134,895   28.1  27.6     44  23  P.Goldschmidt (7.1)   
+         4  2,177,617   28.3  27.4     48  23         A.Hill (5.0)   
+         
+                                         Managers               current  
+         0                         C.Hale (69-93)  Arizona Diamondbacks  
+         1                         C.Hale (79-83)  Arizona Diamondbacks  
+         2  K.Gibson (63-96) and A.Trammell (1-2)  Arizona Diamondbacks  
+         3                       K.Gibson (81-81)  Arizona Diamondbacks  
+         4                       K.Gibson (81-81)  Arizona Diamondbacks  
+         
+         [5 rows x 24 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{}Subsetting Dataframe:}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}Extracting rows}
+         \PY{n}{mlb}\PY{p}{[}\PY{l+m+mi}{50}\PY{p}{:}\PY{l+m+mi}{101}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}      Unnamed: 0  Rk  Year              Team   League  GamePlayed  Wins  \textbackslash{}
+         50           51  32  1985    Atlanta Braves  NL West         162    66   
+         51           52  33  1984    Atlanta Braves  NL West         162    80   
+         52           53  34  1983    Atlanta Braves  NL West         162    88   
+         53           54  35  1982    Atlanta Braves  NL West         162    89   
+         54           55  36  1981    Atlanta Braves  NL West         107    50   
+         55           56  37  1980    Atlanta Braves  NL West         161    81   
+         56           57  38  1979    Atlanta Braves  NL West         160    66   
+         57           58  39  1978    Atlanta Braves  NL West         162    69   
+         58           59  40  1977    Atlanta Braves  NL West         162    61   
+         59           60  41  1976    Atlanta Braves  NL West         162    70   
+         60           61  42  1975    Atlanta Braves  NL West         161    67   
+         61           62  43  1974    Atlanta Braves  NL West         163    88   
+         62           63  44  1973    Atlanta Braves  NL West         162    76   
+         63           64  45  1972    Atlanta Braves  NL West         155    70   
+         64           65  46  1971    Atlanta Braves  NL West         162    82   
+         65           66  47  1970    Atlanta Braves  NL West         162    76   
+         66           67  48  1969    Atlanta Braves  NL West         162    93   
+         67           68  49  1968    Atlanta Braves       NL         163    81   
+         68           69  50  1967    Atlanta Braves       NL         162    77   
+         69           70  51  1966    Atlanta Braves       NL         163    85   
+         70           71  52  1965  Milwaukee Braves       NL         162    86   
+         71           72  53  1964  Milwaukee Braves       NL         162    88   
+         72           73  54  1963  Milwaukee Braves       NL         163    84   
+         73           74  55  1962  Milwaukee Braves       NL         162    86   
+         74           75  56  1961  Milwaukee Braves       NL         155    83   
+         75           76  57  1960  Milwaukee Braves       NL         154    88   
+         76           77  58  1959  Milwaukee Braves       NL         157    86   
+         77           78  59  1958  Milwaukee Braves       NL         154    92   
+         78           79  60  1957  Milwaukee Braves       NL         155    95   
+         79           80  61  1956  Milwaukee Braves       NL         155    92   
+         80           81  62  1955  Milwaukee Braves       NL         154    85   
+         81           82  63  1954  Milwaukee Braves       NL         154    89   
+         82           83  64  1953  Milwaukee Braves       NL         157    92   
+         83           84  65  1952     Boston Braves       NL         155    64   
+         84           85  66  1951     Boston Braves       NL         155    76   
+         85           86  67  1950     Boston Braves       NL         156    83   
+         86           87  68  1949     Boston Braves       NL         157    75   
+         87           88  69  1948     Boston Braves       NL         154    91   
+         88           89  70  1947     Boston Braves       NL         154    86   
+         89           90  71  1946     Boston Braves       NL         154    81   
+         90           91  72  1945     Boston Braves       NL         154    67   
+         91           92  73  1944     Boston Braves       NL         155    65   
+         92           93  74  1943     Boston Braves       NL         153    68   
+         93           94  75  1942     Boston Braves       NL         150    59   
+         94           95  76  1941     Boston Braves       NL         156    62   
+         95           96  77  1940       Boston Bees       NL         152    65   
+         96           97  78  1939       Boston Bees       NL         152    63   
+         97           98  79  1938       Boston Bees       NL         153    77   
+         98           99  80  1937       Boston Bees       NL         152    79   
+         99          100  81  1936       Boston Bees       NL         157    71   
+         100         101  82  1935     Boston Braves       NL         153    38   
+         
+              Losses  Ties  WinLoss\%       {\ldots}        RunsScored OppontRunScored  \textbackslash{}
+         50       96     0     0.407       {\ldots}               632             781   
+         51       82     0     0.494       {\ldots}               632             655   
+         52       74     0     0.543       {\ldots}               746             640   
+         53       73     0     0.549       {\ldots}               739             702   
+         54       56     1     0.472       {\ldots}               395             416   
+         55       80     0     0.503       {\ldots}               630             660   
+         56       94     0     0.413       {\ldots}               669             763   
+         57       93     0     0.426       {\ldots}               600             750   
+         58      101     0     0.377       {\ldots}               678             895   
+         59       92     0     0.432       {\ldots}               620             700   
+         60       94     0     0.416       {\ldots}               583             739   
+         61       74     1     0.543       {\ldots}               661             563   
+         62       85     1     0.472       {\ldots}               799             774   
+         63       84     1     0.455       {\ldots}               628             730   
+         64       80     0     0.506       {\ldots}               643             699   
+         65       86     0     0.469       {\ldots}               736             772   
+         66       69     0     0.574       {\ldots}               691             631   
+         67       81     1     0.500       {\ldots}               514             549   
+         68       85     0     0.475       {\ldots}               631             640   
+         69       77     1     0.525       {\ldots}               782             683   
+         70       76     0     0.531       {\ldots}               708             633   
+         71       74     0     0.543       {\ldots}               803             744   
+         72       78     1     0.519       {\ldots}               677             603   
+         73       76     0     0.531       {\ldots}               730             665   
+         74       71     1     0.539       {\ldots}               712             656   
+         75       66     0     0.571       {\ldots}               724             658   
+         76       70     1     0.551       {\ldots}               724             623   
+         77       62     0     0.597       {\ldots}               675             541   
+         78       59     1     0.617       {\ldots}               772             613   
+         79       62     1     0.597       {\ldots}               709             569   
+         80       69     0     0.552       {\ldots}               743             668   
+         81       65     0     0.578       {\ldots}               670             556   
+         82       62     3     0.597       {\ldots}               738             589   
+         83       89     2     0.418       {\ldots}               569             651   
+         84       78     1     0.494       {\ldots}               723             662   
+         85       71     2     0.539       {\ldots}               785             736   
+         86       79     3     0.487       {\ldots}               706             719   
+         87       62     1     0.595       {\ldots}               739             584   
+         88       68     0     0.558       {\ldots}               701             626   
+         89       72     1     0.529       {\ldots}               630             592   
+         90       85     2     0.441       {\ldots}               721             728   
+         91       89     1     0.422       {\ldots}               593             674   
+         92       85     0     0.444       {\ldots}               465             612   
+         93       89     2     0.399       {\ldots}               515             645   
+         94       92     2     0.403       {\ldots}               592             720   
+         95       87     0     0.428       {\ldots}               623             745   
+         96       88     1     0.417       {\ldots}               572             659   
+         97       75     1     0.507       {\ldots}               561             618   
+         98       73     0     0.520       {\ldots}               579             556   
+         99       83     3     0.461       {\ldots}               631             715   
+         100     115     0     0.248       {\ldots}               575             852   
+         
+             Attendance BatAge  PAge  X.Bat X.P          Top.Player  \textbackslash{}
+         50   1,350,137   28.1  28.8     33  14      D.Murphy (5.0)   
+         51   1,724,892   27.8  28.4     38  15      D.Murphy (5.5)   
+         52   2,119,935   27.7  29.2     40  17      D.Murphy (7.1)   
+         53   1,801,985   26.9  29.4     39  17      D.Murphy (6.1)   
+         54     535,418   26.5  31.5     40  16        R.Camp (2.7)   
+         55   1,048,411   26.8  29.6     32  11      D.Murphy (6.5)   
+         56     769,465   26.4  28.9     38  17      P.Niekro (8.0)   
+         57     904,494   25.6  28.2     42  18     P.Niekro (10.4)   
+         58     872,464   25.8  28.4     42  22      P.Niekro (8.4)   
+         59     818,179   27.8  29.1     43  18      P.Niekro (6.8)   
+         60     534,672   27.2  29.5     40  19      P.Niekro (6.6)   
+         61     981,085   28.1  29.5     36  15      P.Niekro (8.0)   
+         62     800,655   28.0  28.2     43  21       D.Evans (9.0)   
+         63     752,973   27.2  28.2     36  17      P.Niekro (5.7)   
+         64   1,006,320   27.2  28.5     35  14       H.Aaron (7.2)   
+         65   1,078,848   29.5  28.7     37  17       R.Carty (5.8)   
+         66   1,458,320   29.1  27.5     39  18       H.Aaron (8.0)   
+         67   1,126,540   28.7  27.5     38  17       H.Aaron (6.8)   
+         68   1,389,222   28.6  28.1     41  18       H.Aaron (8.5)   
+         69   1,539,801   28.2  27.9     44  21       H.Aaron (7.8)   
+         70     555,584   28.0  26.5     37  14       H.Aaron (7.8)   
+         71     910,911   27.5  27.9     42  19       H.Aaron (6.8)   
+         72     773,018   27.6  28.1     37  14       H.Aaron (9.1)   
+         73     766,921   28.1  28.9     37  16       H.Aaron (8.5)   
+         74   1,101,441   28.8  30.8     40  16       H.Aaron (9.4)   
+         75   1,497,799   30.0  30.4     36  14       H.Aaron (8.0)   
+         76   1,749,112   29.5  30.2     37  11       H.Aaron (8.6)   
+         77   1,971,101   28.7  29.9     35  13       H.Aaron (7.3)   
+         78   2,215,404   28.0  29.0     39  14       H.Aaron (8.0)   
+         79   2,046,331   27.5  28.6     33  14       H.Aaron (7.1)   
+         80   2,005,836   27.2  27.2     32  15     E.Mathews (7.3)   
+         81   2,131,388   26.5  27.4     31  13     E.Mathews (7.8)   
+         82   1,826,397   27.5  28.1     31  13       W.Spahn (9.1)   
+         83     281,278   28.7  28.8     34  14       W.Spahn (7.1)   
+         84     487,475   30.0  28.0     33  15       W.Spahn (8.0)   
+         85     944,391   29.3  28.6     35  16      S.Gordon (6.3)   
+         86   1,081,795   29.9  28.9     34  12       W.Spahn (5.6)   
+         87   1,455,439   29.6  29.6     35  16        J.Sain (8.5)   
+         88   1,277,361   29.5  30.4     34  17       W.Spahn (9.3)   
+         89     969,673   29.5  30.9     48  21        J.Sain (7.8)   
+         90     374,178   28.8  30.8     42  22      T.Holmes (8.0)   
+         91     208,691   27.7  29.0     37  14       J.Tobin (6.3)   
+         92     271,289   26.9  28.2     37  18     N.Andrews (5.0)   
+         93     285,332   27.1  26.6     34  15    E.Lombardi (3.9)   
+         94     263,680   27.7  26.2     39  15       J.Tobin (4.3)   
+         95     241,616   26.3  28.1     41  17      E.Miller (4.8)   
+         96     285,994   28.4  31.1     39  15        M.West (4.6)   
+         97     341,149   28.6  30.4     39  17       L.Fette (3.5)   
+         98     385,339   28.2  30.8     30  12      J.Turner (6.1)   
+         99     340,585   28.9  30.8     37  20  T.Cuccinello (5.7)   
+         100    232,754   29.3  33.2     31  11      W.Berger (5.7)   
+         
+                                                       Managers         current  
+         50                   E.Haas (50-71) and B.Wine (16-25)  Atlanta Braves  
+         51                                     J.Torre (80-82)  Atlanta Braves  
+         52                                     J.Torre (88-74)  Atlanta Braves  
+         53                                     J.Torre (89-73)  Atlanta Braves  
+         54                                       B.Cox (50-56)  Atlanta Braves  
+         55                                       B.Cox (81-80)  Atlanta Braves  
+         56                                       B.Cox (66-94)  Atlanta Braves  
+         57                                       B.Cox (69-93)  Atlanta Braves  
+         58   D.Bristol (60-100), T.Turner (0-1) and V.Benso{\ldots}  Atlanta Braves  
+         59                                   D.Bristol (70-92)  Atlanta Braves  
+         60                    C.King (58-76) and C.Ryan (9-18)  Atlanta Braves  
+         61                E.Mathews (50-49) and C.King (38-25)  Atlanta Braves  
+         62                                   E.Mathews (76-85)  Atlanta Braves  
+         63              L.Harris (47-57) and E.Mathews (23-27)  Atlanta Braves  
+         64                                    L.Harris (82-80)  Atlanta Braves  
+         65                                    L.Harris (76-86)  Atlanta Braves  
+         66                                    L.Harris (93-69)  Atlanta Braves  
+         67                                    L.Harris (81-81)  Atlanta Braves  
+         68           B.Hitchcock (77-82) and K.Silvestri (0-3)  Atlanta Braves  
+         69            B.Bragan (52-59) and B.Hitchcock (33-18)  Atlanta Braves  
+         70                                    B.Bragan (86-76)  Atlanta Braves  
+         71                                    B.Bragan (88-74)  Atlanta Braves  
+         72                                    B.Bragan (84-78)  Atlanta Braves  
+         73                                  B.Tebbetts (86-76)  Atlanta Braves  
+         74            C.Dressen (71-58) and B.Tebbetts (12-13)  Atlanta Braves  
+         75                                   C.Dressen (88-66)  Atlanta Braves  
+         76                                     F.Haney (86-70)  Atlanta Braves  
+         77                                     F.Haney (92-62)  Atlanta Braves  
+         78                                     F.Haney (95-59)  Atlanta Braves  
+         79                 C.Grimm (24-22) and F.Haney (68-40)  Atlanta Braves  
+         80                                     C.Grimm (85-69)  Atlanta Braves  
+         81                                     C.Grimm (89-65)  Atlanta Braves  
+         82                                     C.Grimm (92-62)  Atlanta Braves  
+         83                T.Holmes (13-22) and C.Grimm (51-67)  Atlanta Braves  
+         84           B.Southworth (28-31) and T.Holmes (48-47)  Atlanta Braves  
+         85                                B.Southworth (83-71)  Atlanta Braves  
+         86           B.Southworth (55-54) and J.Cooney (20-25)  Atlanta Braves  
+         87                                B.Southworth (91-62)  Atlanta Braves  
+         88                                B.Southworth (86-68)  Atlanta Braves  
+         89                                B.Southworth (81-72)  Atlanta Braves  
+         90          B.Coleman (42-51) and D.Bissonette (25-34)  Atlanta Braves  
+         91                                   B.Coleman (65-89)  Atlanta Braves  
+         92             B.Coleman (21-25) and C.Stengel (47-60)  Atlanta Braves  
+         93                                   C.Stengel (59-89)  Atlanta Braves  
+         94                                   C.Stengel (62-92)  Atlanta Braves  
+         95                                   C.Stengel (65-87)  Atlanta Braves  
+         96                                   C.Stengel (63-88)  Atlanta Braves  
+         97                                   C.Stengel (77-75)  Atlanta Braves  
+         98                                 B.McKechnie (79-73)  Atlanta Braves  
+         99                                 B.McKechnie (71-83)  Atlanta Braves  
+         100                               B.McKechnie (38-115)  Atlanta Braves  
+         
+         [51 rows x 24 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{mlb}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]} \PY{c+c1}{\PYZsh{}every 20th row}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:}       Unnamed: 0   Rk  Year                     Team      League  GamePlayed  \textbackslash{}
+         0              1    1  2016     Arizona Diamondbacks     NL West         162   
+         20            21    2  2015           Atlanta Braves     NL East         162   
+         40            41   22  1995           Atlanta Braves     NL East         144   
+         60            61   42  1975           Atlanta Braves     NL West         161   
+         80            81   62  1955         Milwaukee Braves          NL         154   
+         100          101   82  1935            Boston Braves          NL         153   
+         120          121  102  1915            Boston Braves          NL         157   
+         140          141  122  1895        Boston Beaneaters          NL         132   
+         160          161    1  2016        Baltimore Orioles     AL East         162   
+         180          181   21  1996        Baltimore Orioles     AL East         163   
+         200          201   41  1976        Baltimore Orioles     AL East         162   
+         220          221   61  1956        Baltimore Orioles          AL         154   
+         240          241   81  1936         St. Louis Browns          AL         155   
+         260          261  101  1916         St. Louis Browns          AL         158   
+         280          281    5  2012           Boston Red Sox     AL East         162   
+         300          301   25  1992           Boston Red Sox     AL East         162   
+         320          321   45  1972           Boston Red Sox     AL East         155   
+         340          341   65  1952           Boston Red Sox          AL         154   
+         360          361   85  1932           Boston Red Sox          AL         154   
+         380          381  105  1912           Boston Red Sox          AL         154   
+         400          401    9  2008             Chicago Cubs  NL Central         161   
+         420          421   29  1988             Chicago Cubs     NL East         163   
+         440          441   49  1968             Chicago Cubs          NL         163   
+         460          461   69  1948             Chicago Cubs          NL         155   
+         480          481   89  1928             Chicago Cubs          NL         154   
+         500          501  109  1908             Chicago Cubs          NL         158   
+         520          521  129  1888  Chicago White Stockings          NL         136   
+         540          541    8  2009        Chicago White Sox  AL Central         162   
+         560          561   28  1989        Chicago White Sox     AL West         161   
+         580          581   48  1969        Chicago White Sox     AL West         162   
+         {\ldots}          {\ldots}  {\ldots}   {\ldots}                      {\ldots}         {\ldots}         {\ldots}   
+         2000        2001   62  1955       Pittsburgh Pirates          NL         154   
+         2020        2021   82  1935       Pittsburgh Pirates          NL         153   
+         2040        2041  102  1915       Pittsburgh Pirates          NL         156   
+         2060        2061  122  1895       Pittsburgh Pirates          NL         134   
+         2080        2081    7  2010         San Diego Padres     NL West         162   
+         2100        2101   27  1990         San Diego Padres     NL West         162   
+         2120        2121   47  1970         San Diego Padres     NL West         162   
+         2140        2141   19  1998     San Francisco Giants     NL West         163   
+         2160        2161   39  1978     San Francisco Giants     NL West         162   
+         2180        2181   59  1958     San Francisco Giants          NL         154   
+         2200        2201   79  1938          New York Giants          NL         152   
+         2220        2221   99  1918          New York Giants          NL         124   
+         2240        2241  119  1898          New York Giants          NL         157   
+         2260        2261    5  2012         Seattle Mariners     AL West         162   
+         2280        2281   25  1992         Seattle Mariners     AL West         162   
+         2300        2301    5  2012      St. Louis Cardinals  NL Central         162   
+         2320        2321   25  1992      St. Louis Cardinals     NL East         162   
+         2340        2341   45  1972      St. Louis Cardinals     NL East         156   
+         2360        2361   65  1952      St. Louis Cardinals          NL         154   
+         2380        2381   85  1932      St. Louis Cardinals          NL         156   
+         2400        2401  105  1912      St. Louis Cardinals          NL         153   
+         2420        2421  125  1892         St. Louis Browns          NL         155   
+         2440        2441   10  2007     Tampa Bay Devil Rays     AL East         162   
+         2460        2461   11  2006            Texas Rangers     AL West         162   
+         2480        2481   31  1986            Texas Rangers     AL West         162   
+         2500        2501   51  1966      Washington Senators          AL         159   
+         2520        2521   15  2002        Toronto Blue Jays     AL East         162   
+         2540        2541   35  1982        Toronto Blue Jays     AL East         162   
+         2560        2561   15  2002           Montreal Expos     NL East         162   
+         2580        2581   35  1982           Montreal Expos     NL East         162   
+         
+               Wins  Losses  Ties  WinLoss\%          {\ldots}           RunsScored  \textbackslash{}
+         0       69      93     0     0.426          {\ldots}                  752   
+         20      67      95     0     0.414          {\ldots}                  573   
+         40      90      54     0     0.625          {\ldots}                  645   
+         60      67      94     0     0.416          {\ldots}                  583   
+         80      85      69     0     0.552          {\ldots}                  743   
+         100     38     115     0     0.248          {\ldots}                  575   
+         120     83      69     5     0.546          {\ldots}                  582   
+         140     71      60     1     0.542          {\ldots}                  911   
+         160     89      73     0     0.549          {\ldots}                  744   
+         180     88      74     1     0.543          {\ldots}                  949   
+         200     88      74     0     0.543          {\ldots}                  619   
+         220     69      85     0     0.448          {\ldots}                  571   
+         240     57      95     3     0.375          {\ldots}                  804   
+         260     79      75     4     0.513          {\ldots}                  588   
+         280     69      93     0     0.426          {\ldots}                  734   
+         300     73      89     0     0.451          {\ldots}                  599   
+         320     85      70     0     0.548          {\ldots}                  640   
+         340     76      78     0     0.494          {\ldots}                  668   
+         360     43     111     0     0.279          {\ldots}                  566   
+         380    105      47     2     0.691          {\ldots}                  799   
+         400     97      64     0     0.602          {\ldots}                  855   
+         420     77      85     1     0.475          {\ldots}                  660   
+         440     84      78     1     0.519          {\ldots}                  612   
+         460     64      90     1     0.416          {\ldots}                  597   
+         480     91      63     0     0.591          {\ldots}                  714   
+         500     99      55     4     0.643          {\ldots}                  624   
+         520     77      58     1     0.570          {\ldots}                  734   
+         540     79      83     0     0.488          {\ldots}                  724   
+         560     69      92     0     0.429          {\ldots}                  693   
+         580     68      94     0     0.420          {\ldots}                  625   
+         {\ldots}    {\ldots}     {\ldots}   {\ldots}       {\ldots}          {\ldots}                  {\ldots}   
+         2000    60      94     0     0.390          {\ldots}                  560   
+         2020    86      67     0     0.562          {\ldots}                  743   
+         2040    73      81     2     0.474          {\ldots}                  557   
+         2060    71      61     2     0.538          {\ldots}                  815   
+         2080    90      72     0     0.556          {\ldots}                  665   
+         2100    75      87     0     0.463          {\ldots}                  673   
+         2120    63      99     0     0.389          {\ldots}                  681   
+         2140    89      74     0     0.546          {\ldots}                  845   
+         2160    89      73     0     0.549          {\ldots}                  613   
+         2180    80      74     0     0.519          {\ldots}                  727   
+         2200    83      67     2     0.553          {\ldots}                  705   
+         2220    71      53     0     0.573          {\ldots}                  480   
+         2240    77      73     7     0.513          {\ldots}                  837   
+         2260    75      87     0     0.463          {\ldots}                  619   
+         2280    64      98     0     0.395          {\ldots}                  679   
+         2300    88      74     0     0.543          {\ldots}                  765   
+         2320    83      79     0     0.512          {\ldots}                  631   
+         2340    75      81     0     0.481          {\ldots}                  568   
+         2360    88      66     0     0.571          {\ldots}                  677   
+         2380    72      82     2     0.468          {\ldots}                  684   
+         2400    63      90     0     0.412          {\ldots}                  659   
+         2420    56      94     5     0.373          {\ldots}                  703   
+         2440    66      96     0     0.407          {\ldots}                  782   
+         2460    80      82     0     0.494          {\ldots}                  835   
+         2480    87      75     0     0.537          {\ldots}                  771   
+         2500    71      88     0     0.447          {\ldots}                  557   
+         2520    78      84     0     0.481          {\ldots}                  813   
+         2540    78      84     0     0.481          {\ldots}                  651   
+         2560    83      79     0     0.512          {\ldots}                  735   
+         2580    86      76     0     0.531          {\ldots}                  697   
+         
+              OppontRunScored Attendance BatAge  PAge  X.Bat X.P         Top.Player  \textbackslash{}
+         0                890  2,036,216   26.7  26.4     50  29     J.Segura (5.7)   
+         20               760  2,001,392   28.8  26.6     60  37    A.Simmons (4.0)   
+         40               540  2,561,831   27.9  27.4     40  20     G.Maddux (9.6)   
+         60               739    534,672   27.2  29.5     40  19     P.Niekro (6.6)   
+         80               668  2,005,836   27.2  27.2     32  15    E.Mathews (7.3)   
+         100              852    232,754   29.3  33.2     31  11     W.Berger (5.7)   
+         120              545    376,283   27.5  27.2     34  13      S.Magee (4.8)   
+         140              829    242,000   28.2  25.2     22   9    K.Nichols (9.7)   
+         160              715  2,172,344   28.4  27.9     40  27    M.Machado (6.7)   
+         180              903  3,646,950   31.1  28.9     45  23   B.Anderson (6.9)   
+         200              598  1,058,609   29.4  28.8     37  15     J.Palmer (6.6)   
+         220              705    901,201   28.2  30.0     48  23     B.Nieman (4.0)   
+         240             1064     93,267   29.4  30.5     28  14      H.Clift (5.2)   
+         260              545    335,740   28.2  28.0     32  12     G.Sisler (5.2)   
+         280              806  3,043,003   29.4  28.7     56  26    D.Pedroia (5.1)   
+         300              669  2,468,574   28.9  31.5     38  16    R.Clemens (8.9)   
+         320              620  1,441,718   28.9  28.9     38  17       C.Fisk (7.3)   
+         340              658  1,115,750   27.8  29.5     48  19    B.Goodman (3.9)   
+         360              915    182,150   28.4  25.7     41  18  D.Alexander (4.3)   
+         380              544    597,096   26.1  25.2     27  11      S.Wood (11.7)   
+         400              671  3,300,200   30.1  28.9     42  23   R.Dempster (6.9)   
+         420              694  2,089,034   27.6  27.1     39  18     G.Maddux (5.7)   
+         440              611  1,043,409   28.4  25.4     42  19    F.Jenkins (6.6)   
+         460              705  1,237,792   28.1  27.4     37  16      A.Pafko (6.0)   
+         480              615  1,143,740   28.7  28.6     28  11      S.Blake (5.6)   
+         500              461    665,325   28.7  28.7     26  10      M.Brown (8.1)   
+         520              659        NaN   26.9  22.3     22  11      C.Anson (6.9)   
+         540              732  2,284,163   29.8  29.5     45  24    M.Buehrle (5.4)   
+         560              750  1,045,651   27.6  26.4     42  19       C.Fisk (3.3)   
+         580              723    589,546   27.2  28.4     43  20       T.John (4.8)   
+         {\ldots}              {\ldots}        {\ldots}    {\ldots}   {\ldots}    {\ldots}  ..                {\ldots}   
+         2000             767    469,397   25.5  26.8     42  19     B.Friend (5.9)   
+         2020             647    352,885   28.0  29.6     29  12    A.Vaughan (9.2)   
+         2040             520    225,743   27.9  25.9     34  11     A.Mamaux (5.7)   
+         2060             799    188,000   26.7  23.7     28  13    P.Hawley (10.9)   
+         2080             581  2,131,774   29.1  27.2     40  19   A.Gonzalez (4.3)   
+         2100             673  1,856,396   28.7  29.5     37  16    E.Whitson (7.1)   
+         2120             788    643,679   26.6  26.4     37  16     C.Gaston (5.1)   
+         2140             739  1,925,364   30.7  31.8     41  17      B.Bonds (8.1)   
+         2160             594  1,740,477   27.2  27.8     34  14       V.Blue (6.2)   
+         2180             698  1,272,625   26.8  27.6     39  17      W.Mays (10.2)   
+         2200             637    799,633   28.5  28.1     30  12        M.Ott (8.9)   
+         2220             415    256,618   28.2  28.0     32  15   A.Fletcher (4.6)   
+         2240             800    265,414   29.0  26.8     26   7      B.Joyce (4.3)   
+         2260             651  1,721,920   27.1  27.9     38  18  F.Hernandez (4.8)   
+         2280             799  1,651,367   28.3  27.4     48  23   E.Martinez (6.5)   
+         2300             648  3,262,109   29.2  28.6     45  24     Y.Molina (6.9)   
+         2320             604  2,418,483   28.6  28.7     39  15  B.Tewksbury (6.3)   
+         2340             600  1,196,894   27.6  27.9     47  22     B.Gibson (7.7)   
+         2360             630    913,113   30.4  28.1     41  20     S.Musial (8.0)   
+         2380             717    279,219   29.5  27.4     42  15       D.Dean (6.6)   
+         2400             830    241,759   26.1  25.0     41  16     S.Sallee (5.5)   
+         2420             922    192,442   28.6  24.8     36  10    K.Gleason (6.0)   
+         2440             944  1,387,603   26.1  27.0     45  24       C.Pena (7.2)   
+         2460             784  2,388,757   28.4  28.3     51  26   G.Matthews (5.2)   
+         2480             743  1,692,002   27.2  26.4     37  16   S.Fletcher (4.7)   
+         2500             659    576,260   27.5  26.9     42  20  F.Valentine (3.5)   
+         2520             828  1,637,900   27.2  27.4     45  24   R.Halladay (7.3)   
+         2540             701  1,275,978   26.5  25.6     36  13      D.Stieb (7.7)   
+         2560             718    812,045   28.2  27.7     43  20   V.Guerrero (7.0)   
+         2580             616  2,318,292   27.9  27.9     42  15     G.Carter (8.6)   
+         
+                                                        Managers               current  
+         0                                        C.Hale (69-93)  Arizona Diamondbacks  
+         20                                   F.Gonzalez (67-95)        Atlanta Braves  
+         40                                        B.Cox (90-54)        Atlanta Braves  
+         60                     C.King (58-76) and C.Ryan (9-18)        Atlanta Braves  
+         80                                      C.Grimm (85-69)        Atlanta Braves  
+         100                                B.McKechnie (38-115)        Atlanta Braves  
+         120                                 G.Stallings (83-69)        Atlanta Braves  
+         140                                     F.Selee (71-60)        Atlanta Braves  
+         160                                 B.Showalter (89-73)     Baltimore Orioles  
+         180                                   D.Johnson (88-74)     Baltimore Orioles  
+         200                                    E.Weaver (88-74)     Baltimore Orioles  
+         220                                  P.Richards (69-85)     Baltimore Orioles  
+         240                                   R.Hornsby (57-95)     Baltimore Orioles  
+         260                                     F.Jones (79-75)     Baltimore Orioles  
+         280                                 B.Valentine (69-93)        Boston Red Sox  
+         300                                    B.Hobson (73-89)        Boston Red Sox  
+         320                                     E.Kasko (85-70)        Boston Red Sox  
+         340                                  L.Boudreau (76-78)        Boston Red Sox  
+         360             S.Collins (11-44) and M.McManus (32-67)        Boston Red Sox  
+         380                                    J.Stahl (105-47)        Boston Red Sox  
+         400                                  L.Piniella (97-64)          Chicago Cubs  
+         420                                    D.Zimmer (77-85)          Chicago Cubs  
+         440                                  L.Durocher (84-78)          Chicago Cubs  
+         460                                     C.Grimm (64-90)          Chicago Cubs  
+         480                                  J.McCarthy (91-63)          Chicago Cubs  
+         500                                    F.Chance (99-55)          Chicago Cubs  
+         520                                     C.Anson (77-58)          Chicago Cubs  
+         540                                   O.Guillen (79-83)     Chicago White Sox  
+         560                                   J.Torborg (69-92)     Chicago White Sox  
+         580              A.Lopez (8-9) and D.Gutteridge (60-85)     Chicago White Sox  
+         {\ldots}                                                 {\ldots}                   {\ldots}  
+         2000                                    F.Haney (60-94)    Pittsburgh Pirates  
+         2020                                  P.Traynor (86-67)    Pittsburgh Pirates  
+         2040                                   F.Clarke (73-81)    Pittsburgh Pirates  
+         2060                                     C.Mack (71-61)    Pittsburgh Pirates  
+         2080                                    B.Black (90-72)      San Diego Padres  
+         2100             J.McKeon (37-43) and G.Riddoch (38-44)      San Diego Padres  
+         2120                                    P.Gomez (63-99)      San Diego Padres  
+         2140                                    D.Baker (89-74)  San Francisco Giants  
+         2160                                J.Altobelli (89-73)  San Francisco Giants  
+         2180                                   B.Rigney (80-74)  San Francisco Giants  
+         2200                                    B.Terry (83-67)  San Francisco Giants  
+         2220                                   J.McGraw (71-53)  San Francisco Giants  
+         2240                 B.Joyce (68-60) and C.Anson (9-13)  San Francisco Giants  
+         2260                                    E.Wedge (75-87)      Seattle Mariners  
+         2280                                  B.Plummer (64-98)      Seattle Mariners  
+         2300                                  M.Matheny (88-74)   St. Louis Cardinals  
+         2320                                    J.Torre (83-79)   St. Louis Cardinals  
+         2340                             R.Schoendienst (75-81)   St. Louis Cardinals  
+         2360                                   E.Stanky (88-66)   St. Louis Cardinals  
+         2380                                   G.Street (72-82)   St. Louis Cardinals  
+         2400                                R.Bresnahan (63-90)   St. Louis Cardinals  
+         2420  J.Glasscock (1-3), C.Stricker (6-17), J.Crooks{\ldots}   St. Louis Cardinals  
+         2440                                   J.Maddon (66-96)        Tampa Bay Rays  
+         2460                                B.Showalter (80-82)         Texas Rangers  
+         2480                                B.Valentine (87-75)         Texas Rangers  
+         2500                                   G.Hodges (71-88)         Texas Rangers  
+         2520             B.Martinez (20-33) and C.Tosca (58-51)     Toronto Blue Jays  
+         2540                                      B.Cox (78-84)     Toronto Blue Jays  
+         2560                                 F.Robinson (83-79)  Washington Nationals  
+         2580                                  J.Fanning (86-76)  Washington Nationals  
+         
+         [130 rows x 24 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{c+c1}{\PYZsh{}Extract columns}
+         \PY{n}{mlb}\PY{o}{.}\PY{n}{Year}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 0    2016
+         1    2015
+         2    2014
+         3    2013
+         4    2012
+         Name: Year, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{mlb}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top.Player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Managers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:}             Top.Player                               Managers
+         0       J.Segura (5.7)                         C.Hale (69-93)
+         1  P.Goldschmidt (8.8)                         C.Hale (79-83)
+         2  P.Goldschmidt (4.5)  K.Gibson (63-96) and A.Trammell (1-2)
+         3  P.Goldschmidt (7.1)                       K.Gibson (81-81)
+         4         A.Hill (5.0)                       K.Gibson (81-81)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{mlb}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Top.Player}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}             Top.Player  Wins
+         0       J.Segura (5.7)    69
+         1  P.Goldschmidt (8.8)    79
+         2  P.Goldschmidt (4.5)    64
+         3  P.Goldschmidt (7.1)    81
+         4         A.Hill (5.0)    81
+         5        J.Upton (6.1)    94
+         6        C.Young (5.4)    65
+         7        D.Haren (7.1)    70
+         8        D.Haren (6.6)    82
+         9         B.Webb (5.9)    90
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{mlb}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotalGames}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{mlb}\PY{o}{.}\PY{n}{Wins} \PY{o}{+} \PY{n}{mlb}\PY{o}{.}\PY{n}{Losses} \PY{o}{+} \PY{n}{mlb}\PY{o}{.}\PY{n}{Ties}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{mlb}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotalGames}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GamePlayed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}  \PY{c+c1}{\PYZsh{}to check that Wins+Losses equal to GamePlayed column}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:}     TotalGames  GamePlayed
+         0          162         162
+         1          162         162
+         2          162         162
+         3          162         162
+         4          162         162
+         5          162         162
+         6          162         162
+         7          162         162
+         8          162         162
+         9          162         162
+         10         162         162
+         11         162         162
+         12         162         162
+         13         162         162
+         14         162         162
+         15         162         162
+         16         162         162
+         17         162         162
+         18         162         162
+         19         161         161
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{mlb}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TotalGames}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}to drop a column}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:}       Unnamed: 0  Rk  Year                  Team   League  GamePlayed  Wins  \textbackslash{}
+         0              1   1  2016  Arizona Diamondbacks  NL West         162    69   
+         1              2   2  2015  Arizona Diamondbacks  NL West         162    79   
+         2              3   3  2014  Arizona Diamondbacks  NL West         162    64   
+         3              4   4  2013  Arizona Diamondbacks  NL West         162    81   
+         4              5   5  2012  Arizona Diamondbacks  NL West         162    81   
+         5              6   6  2011  Arizona Diamondbacks  NL West         162    94   
+         6              7   7  2010  Arizona Diamondbacks  NL West         162    65   
+         7              8   8  2009  Arizona Diamondbacks  NL West         162    70   
+         8              9   9  2008  Arizona Diamondbacks  NL West         162    82   
+         9             10  10  2007  Arizona Diamondbacks  NL West         162    90   
+         10            11  11  2006  Arizona Diamondbacks  NL West         162    76   
+         11            12  12  2005  Arizona Diamondbacks  NL West         162    77   
+         12            13  13  2004  Arizona Diamondbacks  NL West         162    51   
+         13            14  14  2003  Arizona Diamondbacks  NL West         162    84   
+         14            15  15  2002  Arizona Diamondbacks  NL West         162    98   
+         15            16  16  2001  Arizona Diamondbacks  NL West         162    92   
+         16            17  17  2000  Arizona Diamondbacks  NL West         162    85   
+         17            18  18  1999  Arizona Diamondbacks  NL West         162   100   
+         18            19  19  1998  Arizona Diamondbacks  NL West         162    65   
+         19            20   1  2016        Atlanta Braves  NL East         161    68   
+         20            21   2  2015        Atlanta Braves  NL East         162    67   
+         21            22   3  2014        Atlanta Braves  NL East         162    79   
+         22            23   4  2013        Atlanta Braves  NL East         162    96   
+         23            24   5  2012        Atlanta Braves  NL East         162    94   
+         24            25   6  2011        Atlanta Braves  NL East         162    89   
+         25            26   7  2010        Atlanta Braves  NL East         162    91   
+         26            27   8  2009        Atlanta Braves  NL East         162    86   
+         27            28   9  2008        Atlanta Braves  NL East         162    72   
+         28            29  10  2007        Atlanta Braves  NL East         162    84   
+         29            30  11  2006        Atlanta Braves  NL East         162    79   
+         {\ldots}          {\ldots}  ..   {\ldots}                   {\ldots}      {\ldots}         {\ldots}   {\ldots}   
+         2564        2565  19  1998        Montreal Expos  NL East         162    65   
+         2565        2566  20  1997        Montreal Expos  NL East         162    78   
+         2566        2567  21  1996        Montreal Expos  NL East         162    88   
+         2567        2568  22  1995        Montreal Expos  NL East         144    66   
+         2568        2569  23  1994        Montreal Expos  NL East         114    74   
+         2569        2570  24  1993        Montreal Expos  NL East         163    94   
+         2570        2571  25  1992        Montreal Expos  NL East         162    87   
+         2571        2572  26  1991        Montreal Expos  NL East         161    71   
+         2572        2573  27  1990        Montreal Expos  NL East         162    85   
+         2573        2574  28  1989        Montreal Expos  NL East         162    81   
+         2574        2575  29  1988        Montreal Expos  NL East         163    81   
+         2575        2576  30  1987        Montreal Expos  NL East         162    91   
+         2576        2577  31  1986        Montreal Expos  NL East         161    78   
+         2577        2578  32  1985        Montreal Expos  NL East         161    84   
+         2578        2579  33  1984        Montreal Expos  NL East         161    78   
+         2579        2580  34  1983        Montreal Expos  NL East         163    82   
+         2580        2581  35  1982        Montreal Expos  NL East         162    86   
+         2581        2582  36  1981        Montreal Expos  NL East         108    60   
+         2582        2583  37  1980        Montreal Expos  NL East         162    90   
+         2583        2584  38  1979        Montreal Expos  NL East         160    95   
+         2584        2585  39  1978        Montreal Expos  NL East         162    76   
+         2585        2586  40  1977        Montreal Expos  NL East         162    75   
+         2586        2587  41  1976        Montreal Expos  NL East         162    55   
+         2587        2588  42  1975        Montreal Expos  NL East         162    75   
+         2588        2589  43  1974        Montreal Expos  NL East         161    79   
+         2589        2590  44  1973        Montreal Expos  NL East         162    79   
+         2590        2591  45  1972        Montreal Expos  NL East         156    70   
+         2591        2592  46  1971        Montreal Expos  NL East         162    71   
+         2592        2593  47  1970        Montreal Expos  NL East         162    73   
+         2593        2594  48  1969        Montreal Expos  NL East         162    52   
+         
+               Losses  Ties  WinLoss\%          {\ldots}           RunsScored  \textbackslash{}
+         0         93     0     0.426          {\ldots}                  752   
+         1         83     0     0.488          {\ldots}                  720   
+         2         98     0     0.395          {\ldots}                  615   
+         3         81     0     0.500          {\ldots}                  685   
+         4         81     0     0.500          {\ldots}                  734   
+         5         68     0     0.580          {\ldots}                  731   
+         6         97     0     0.401          {\ldots}                  713   
+         7         92     0     0.432          {\ldots}                  720   
+         8         80     0     0.506          {\ldots}                  720   
+         9         72     0     0.556          {\ldots}                  712   
+         10        86     0     0.469          {\ldots}                  773   
+         11        85     0     0.475          {\ldots}                  696   
+         12       111     0     0.315          {\ldots}                  615   
+         13        78     0     0.519          {\ldots}                  717   
+         14        64     0     0.605          {\ldots}                  819   
+         15        70     0     0.568          {\ldots}                  818   
+         16        77     0     0.525          {\ldots}                  792   
+         17        62     0     0.617          {\ldots}                  908   
+         18        97     0     0.401          {\ldots}                  665   
+         19        93     0     0.422          {\ldots}                  649   
+         20        95     0     0.414          {\ldots}                  573   
+         21        83     0     0.488          {\ldots}                  573   
+         22        66     0     0.593          {\ldots}                  688   
+         23        68     0     0.580          {\ldots}                  700   
+         24        73     0     0.549          {\ldots}                  641   
+         25        71     0     0.562          {\ldots}                  738   
+         26        76     0     0.531          {\ldots}                  735   
+         27        90     0     0.444          {\ldots}                  753   
+         28        78     0     0.519          {\ldots}                  810   
+         29        83     0     0.488          {\ldots}                  849   
+         {\ldots}      {\ldots}   {\ldots}       {\ldots}          {\ldots}                  {\ldots}   
+         2564      97     0     0.401          {\ldots}                  644   
+         2565      84     0     0.481          {\ldots}                  691   
+         2566      74     0     0.543          {\ldots}                  741   
+         2567      78     0     0.458          {\ldots}                  621   
+         2568      40     0     0.649          {\ldots}                  585   
+         2569      68     1     0.580          {\ldots}                  732   
+         2570      75     0     0.537          {\ldots}                  648   
+         2571      90     0     0.441          {\ldots}                  579   
+         2572      77     0     0.525          {\ldots}                  662   
+         2573      81     0     0.500          {\ldots}                  632   
+         2574      81     1     0.500          {\ldots}                  628   
+         2575      71     0     0.562          {\ldots}                  741   
+         2576      83     0     0.484          {\ldots}                  637   
+         2577      77     0     0.522          {\ldots}                  633   
+         2578      83     0     0.484          {\ldots}                  593   
+         2579      80     1     0.506          {\ldots}                  677   
+         2580      76     0     0.531          {\ldots}                  697   
+         2581      48     0     0.556          {\ldots}                  443   
+         2582      72     0     0.556          {\ldots}                  694   
+         2583      65     0     0.594          {\ldots}                  701   
+         2584      86     0     0.469          {\ldots}                  633   
+         2585      87     0     0.463          {\ldots}                  665   
+         2586     107     0     0.340          {\ldots}                  531   
+         2587      87     0     0.463          {\ldots}                  601   
+         2588      82     0     0.491          {\ldots}                  662   
+         2589      83     0     0.488          {\ldots}                  668   
+         2590      86     0     0.449          {\ldots}                  513   
+         2591      90     1     0.441          {\ldots}                  622   
+         2592      89     0     0.451          {\ldots}                  687   
+         2593     110     0     0.321          {\ldots}                  582   
+         
+              OppontRunScored Attendance BatAge  PAge  X.Bat X.P           Top.Player  \textbackslash{}
+         0                890  2,036,216   26.7  26.4     50  29       J.Segura (5.7)   
+         1                713  2,080,145   26.6  27.1     50  27  P.Goldschmidt (8.8)   
+         2                742  2,073,730   27.6  28.0     52  25  P.Goldschmidt (4.5)   
+         3                695  2,134,895   28.1  27.6     44  23  P.Goldschmidt (7.1)   
+         4                688  2,177,617   28.3  27.4     48  23         A.Hill (5.0)   
+         5                662  2,105,432   28.2  27.4     51  25        J.Upton (6.1)   
+         6                836  2,056,697   26.8  27.9     48  28        C.Young (5.4)   
+         7                782  2,128,765   26.5  27.7     45  24        D.Haren (7.1)   
+         8                706  2,509,924   26.7  29.4     41  20        D.Haren (6.6)   
+         9                732  2,325,249   26.6  28.2     47  26         B.Webb (5.9)   
+         10               788  2,091,685   29.6  28.8     45  25         B.Webb (7.0)   
+         11               856  2,059,424   30.3  27.4     43  25     C.Counsell (5.5)   
+         12               899  2,519,560   28.9  29.3     52  25      R.Johnson (8.3)   
+         13               685  2,805,542   30.6  29.2     43  22         B.Webb (5.9)   
+         14               674  3,198,977   31.7  31.7     42  20     R.Johnson (10.7)   
+         15               677  2,736,451   31.9  30.9     47  22      R.Johnson (9.4)   
+         16               754  2,942,251   30.8  31.6     41  17      R.Johnson (8.1)   
+         17               676  3,019,654   30.0  30.6     43  20      R.Johnson (8.8)   
+         18               812  3,610,290   27.8  27.4     46  25         O.Daal (4.1)   
+         19               779  2,020,914   28.9  26.4     60  35      F.Freeman (6.5)   
+         20               760  2,001,392   28.8  26.6     60  37      A.Simmons (4.0)   
+         21               597  2,354,305   26.8  27.3     39  20      J.Heyward (6.2)   
+         22               548  2,548,679   26.8  27.2     44  21      A.Simmons (7.0)   
+         23               600  2,420,171   28.5  27.6     41  21        M.Bourn (6.1)   
+         24               605  2,372,940   28.9  28.4     45  21   E.O'Flaherty (3.4)   
+         25               629  2,510,119   28.6  30.1     43  21      J.Heyward (6.4)   
+         26               641  2,373,631   28.8  28.9     45  21     J.Jurrjens (6.8)   
+         27               778  2,532,834   27.2  28.6     49  28        C.Jones (7.3)   
+         28               733  2,745,207   27.7  29.4     50  28        C.Jones (7.6)   
+         29               805  2,550,524   27.5  29.4     45  26       J.Smoltz (5.9)   
+         {\ldots}              {\ldots}        {\ldots}    {\ldots}   {\ldots}    {\ldots}  ..                  {\ldots}   
+         2564             783    914,909   25.9  25.7     41  19     V.Guerrero (7.4)   
+         2565             740  1,497,609   27.7  26.4     41  21     P.Martinez (8.8)   
+         2566             668  1,616,709   27.4  27.5     39  18      J.Fassero (5.3)   
+         2567             638  1,309,618   26.2  27.6     45  21     P.Martinez (4.1)   
+         2568             454  1,276,250   26.2  26.2     32  16         M.Alou (5.1)   
+         2569             682  1,641,437   25.7  27.9     48  22      M.Grissom (5.2)   
+         2570             581  1,669,127   27.4  28.0     47  21      M.Grissom (5.4)   
+         2571             655    934,742   27.7  28.4     38  19     D.Martinez (5.8)   
+         2572             598  1,373,087   27.7  29.3     44  24     D.Martinez (4.3)   
+         2573             630  1,783,533   28.9  30.5     39  20     M.Langston (4.9)   
+         2574             592  1,478,659   28.2  29.0     40  17    A.Galarraga (5.7)   
+         2575             720  1,850,324   27.5  28.2     41  21       T.Raines (6.7)   
+         2576             688  1,128,981   27.4  27.5     43  20       T.Raines (5.5)   
+         2577             636  1,502,494   27.7  27.5     44  20       T.Raines (7.6)   
+         2578             585  1,606,531   28.8  27.8     43  16       G.Carter (7.4)   
+         2579             646  2,320,651   28.4  27.8     41  15       G.Carter (7.1)   
+         2580             616  2,318,292   27.9  27.9     42  15       G.Carter (8.6)   
+         2581             394  1,534,564   26.9  28.9     43  15       A.Dawson (7.4)   
+         2582             629  2,208,175   27.1  28.9     37  16       A.Dawson (6.8)   
+         2583             581  2,102,173   27.3  28.6     34  14       G.Carter (5.9)   
+         2584             611  1,427,007   27.2  28.9     36  18       G.Carter (5.8)   
+         2585             736  1,433,757   26.4  26.9     37  17       G.Carter (5.3)   
+         2586             734    646,704   25.1  27.4     47  19       S.Rogers (4.7)   
+         2587             690    908,292   24.7  26.8     38  14       S.Rogers (4.8)   
+         2588             657  1,019,134   27.7  25.8     41  14    M.Jorgensen (4.2)   
+         2589             702  1,246,863   27.7  26.2     41  15    K.Singleton (5.7)   
+         2590             609  1,142,145   26.9  25.9     30  12     M.Marshall (4.0)   
+         2591             729  1,290,963   28.3  27.0     33  12        R.Staub (5.9)   
+         2592             807  1,424,683   27.7  26.7     40  17        R.Staub (6.3)   
+         2593             791  1,212,608   27.6  26.8     42  18        R.Staub (6.2)   
+         
+                                               Managers               current  
+         0                               C.Hale (69-93)  Arizona Diamondbacks  
+         1                               C.Hale (79-83)  Arizona Diamondbacks  
+         2        K.Gibson (63-96) and A.Trammell (1-2)  Arizona Diamondbacks  
+         3                             K.Gibson (81-81)  Arizona Diamondbacks  
+         4                             K.Gibson (81-81)  Arizona Diamondbacks  
+         5                             K.Gibson (94-68)  Arizona Diamondbacks  
+         6         A.Hinch (31-48) and K.Gibson (34-49)  Arizona Diamondbacks  
+         7         B.Melvin (12-17) and A.Hinch (58-75)  Arizona Diamondbacks  
+         8                             B.Melvin (82-80)  Arizona Diamondbacks  
+         9                             B.Melvin (90-72)  Arizona Diamondbacks  
+         10                            B.Melvin (76-86)  Arizona Diamondbacks  
+         11                            B.Melvin (77-85)  Arizona Diamondbacks  
+         12     B.Brenly (29-50) and A.Pedrique (22-61)  Arizona Diamondbacks  
+         13                            B.Brenly (84-78)  Arizona Diamondbacks  
+         14                            B.Brenly (98-64)  Arizona Diamondbacks  
+         15                            B.Brenly (92-70)  Arizona Diamondbacks  
+         16                         B.Showalter (85-77)  Arizona Diamondbacks  
+         17                        B.Showalter (100-62)  Arizona Diamondbacks  
+         18                         B.Showalter (65-97)  Arizona Diamondbacks  
+         19     F.Gonzalez (9-28) and B.Snitker (59-65)        Atlanta Braves  
+         20                          F.Gonzalez (67-95)        Atlanta Braves  
+         21                          F.Gonzalez (79-83)        Atlanta Braves  
+         22                          F.Gonzalez (96-66)        Atlanta Braves  
+         23                          F.Gonzalez (94-68)        Atlanta Braves  
+         24                          F.Gonzalez (89-73)        Atlanta Braves  
+         25                               B.Cox (91-71)        Atlanta Braves  
+         26                               B.Cox (86-76)        Atlanta Braves  
+         27                               B.Cox (72-90)        Atlanta Braves  
+         28                               B.Cox (84-78)        Atlanta Braves  
+         29                               B.Cox (79-83)        Atlanta Braves  
+         {\ldots}                                        {\ldots}                   {\ldots}  
+         2564                            F.Alou (65-97)  Washington Nationals  
+         2565                            F.Alou (78-84)  Washington Nationals  
+         2566                            F.Alou (88-74)  Washington Nationals  
+         2567                            F.Alou (66-78)  Washington Nationals  
+         2568                            F.Alou (74-40)  Washington Nationals  
+         2569                            F.Alou (94-68)  Washington Nationals  
+         2570     T.Runnells (17-20) and F.Alou (70-55)  Washington Nationals  
+         2571  B.Rodgers (20-29) and T.Runnells (51-61)  Washington Nationals  
+         2572                         B.Rodgers (85-77)  Washington Nationals  
+         2573                         B.Rodgers (81-81)  Washington Nationals  
+         2574                         B.Rodgers (81-81)  Washington Nationals  
+         2575                         B.Rodgers (91-71)  Washington Nationals  
+         2576                         B.Rodgers (78-83)  Washington Nationals  
+         2577                         B.Rodgers (84-77)  Washington Nationals  
+         2578    B.Virdon (64-67) and J.Fanning (14-16)  Washington Nationals  
+         2579                          B.Virdon (82-80)  Washington Nationals  
+         2580                         J.Fanning (86-76)  Washington Nationals  
+         2581  D.Williams (44-37) and J.Fanning (16-11)  Washington Nationals  
+         2582                        D.Williams (90-72)  Washington Nationals  
+         2583                        D.Williams (95-65)  Washington Nationals  
+         2584                        D.Williams (76-86)  Washington Nationals  
+         2585                        D.Williams (75-87)  Washington Nationals  
+         2586         K.Kuehl (43-85) and C.Fox (12-22)  Washington Nationals  
+         2587                           G.Mauch (75-87)  Washington Nationals  
+         2588                           G.Mauch (79-82)  Washington Nationals  
+         2589                           G.Mauch (79-83)  Washington Nationals  
+         2590                           G.Mauch (70-86)  Washington Nationals  
+         2591                           G.Mauch (71-90)  Washington Nationals  
+         2592                           G.Mauch (73-89)  Washington Nationals  
+         2593                          G.Mauch (52-110)  Washington Nationals  
+         
+         [2594 rows x 24 columns]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
